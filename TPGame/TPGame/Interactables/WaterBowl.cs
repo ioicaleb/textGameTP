@@ -15,10 +15,12 @@ namespace TPGame.Interactables
 
         private int WaterLevel = 50;
 
+        public bool Used() => WaterLevel < 50;
+
         public override void UseInteractable()
         {
             string message;
-            if (Collections.VerifyInventory("water bottle") && WaterLevel > 0)
+            if (Collections.VerifyInventory("water bottle") && Used())
             {
                 ((WaterBottle)Collections.CheckInventory("water bottle")).AddWater(WaterLevel);
                 WaterLevel = 0;

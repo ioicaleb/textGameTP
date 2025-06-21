@@ -29,7 +29,7 @@ namespace TPGame.Items
             {
                 foreach (Item item in Collections.Inventory)
                 {
-                    if (item.Name != "tool belt") 
+                    if (item.Name != "tool belt" && !item.Hide) 
                     { 
                         DialogueHandler.PrintLine($" -{item.Name}");
                     }

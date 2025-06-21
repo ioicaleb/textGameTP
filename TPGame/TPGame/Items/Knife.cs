@@ -15,13 +15,6 @@ namespace TPGame.Items
                 "It's a little dull from your whittling practice, but your duck carvings are getting much better.";
         }
 
-        public override void GetItem()
-        {
-            Kitchen kitchen = ((Kitchen)Collections.VerifyRoom("Kitchen"));
-            kitchen.Description = kitchen.Description.Split("\n")[0];
-            base.GetItem();
-        }
-
         public override void UseItem()
         {
             string message;
@@ -33,7 +26,7 @@ namespace TPGame.Items
             else if (InputHandler.Map.CurrentLocation.Name == "Hidden Room")
             {
                 message = "You flick out your knife and frantically whittle away at the king's candy shell, removing layer after layer of candy coating until your knife is dull and useless. " + InputHandler.Character.AttackKing(25);
-                Collections.RemoveUsedItem(Name);
+                Collections.HideUsedItem(Name);
             }
             else
             {

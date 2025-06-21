@@ -14,7 +14,7 @@ namespace TPGame.Interactables
 
         public override void UseInteractable()
         {
-            if (InputHandler.Character.Lolipop.Health > 0)
+            if (InputHandler.Character.Lolipop.Name == "Bishop" && InputHandler.Character.Lolipop.Health > 0)
             {
                 InputHandler.Character.AttackBoss("You grab the sander and grind the bishop down to a thin shell. One more lick ought to reach the core.");
             }

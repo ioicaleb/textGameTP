@@ -14,7 +14,7 @@ namespace TPGame.Interactables
 
         public override void UseInteractable()
         {
-            if (InputHandler.Character.Lolipop.Health > 0)
+            if (InputHandler.Character.Lolipop.Name == "Knight" && InputHandler.Character.Lolipop.Health > 0)
             {
                 InputHandler.Character.AttackBoss("You grab the knight and lift as much weight as you can manage. You force the knight between the weights and ignore all of your gym etiquette, smashing the knight to pieces. One more lick ought to reach the core.");
             }

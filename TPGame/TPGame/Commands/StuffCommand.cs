@@ -58,7 +58,7 @@ namespace TPGame.Commands
             Item item = Collections.CheckInventory(target);
             if (item != null)
             {
-                if (currentLocation.UsableItems.Contains(target))
+                if (currentLocation.UsableItems.Contains(target) && !item.Hide)
                 {
                     item.UseItem();
                 }

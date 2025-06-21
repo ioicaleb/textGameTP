@@ -116,7 +116,7 @@ namespace TPGame.Dictionaries
 
         public static bool VerifyInventory(string itemName) => CheckInventory(itemName) != null;
 
-        public static void RemoveUsedItem(string itemName) => Inventory.Remove(CheckInventory(itemName));
+        public static void HideUsedItem(string itemName) => CheckInventory(itemName).Hide = true;
 
         public static void ResetAll()
         {

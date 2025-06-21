@@ -19,7 +19,7 @@ namespace TPGame.Items
             if (attic.Locked)
             {
                 base.UseItem("You hook the ends of the ladder into the slots on the attic hatch. After a quick integrity check, you confidently climb into the attic.");
-                Collections.RemoveUsedItem(Name);
+                Collections.HideUsedItem(Name);
                 attic.Unlock();
             }
             else 

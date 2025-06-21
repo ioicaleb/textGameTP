@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TPGame.Models;
 using TPGame.Handlers;
 using TPGame.Rooms;
+using TPGame.Commands;
+using System.Linq;
 
 namespace TPGame.Dictionaries
 {
@@ -29,32 +31,30 @@ namespace TPGame.Dictionaries
             {
 
                 string[] itemOrder = ["tool belt", "water bottle", "key", "knife", "ladder", "lantern", "batteries", "metal detector", "shovel", "dentures", "guard"];
-                List<string> missing = [];
-                int firstMissing = -1;
+                string missing = "";
 
                 foreach (Item i in Array.FindAll(Collections.AllItems, i => !(Collections.VerifyInventory(i.Name))))
                 {
-                    missing.Add(i.Name);
+                    missing = i.Name;
                 }
 
-                foreach (string i in itemOrder)
+                if (missing != "")
                 {
-                    if (missing.Contains(i))
-                    {
-                        firstMissing = Array.IndexOf(itemOrder, i);
-                        break;
-                    }
+                    DialogueHandler.PrintLine($"Get {missing}");
                 }
-
-                if (firstMissing >= 0)
-                {
-                    DialogueHandler.PrintLine($"Get {itemOrder[firstMissing]}");
-                }
-                else
+                else if (missing == "")
                 {
                     DialogueHandler.PrintLine($"Get some fresh air");
                 }
-                switch (firstMissing)
+                else if (!Collections.VerifyRoom("Hidden Room").BossDefeated)
+                {
+                    DialogueHandler.PrintLine($"Find what changed");
+                }
+                else
+                {
+                    DialogueHandler.PrintLine($"End it!");
+                }
+                switch (Array.IndexOf(itemOrder, missing))
                 {
                     case 0: //tool belt in MB
                         DialogueHandler.PrintLine("You haven't grabbed your tool belt yet? That's part of the tutorial.");
@@ -86,7 +86,7 @@ namespace TPGame.Dictionaries
                         {
                             DialogueHandler.PrintLine("You need " + (10 - InputHandler.Character.Player.GetSticks()) + " more sticks. The PANTRY is full of lolipops. Go start some trouble there for some extra sticks.");
                         }
-                        else 
+                        else
                         {
                             DialogueHandler.PrintLine("Now, you have everything you need for the CRAFT BENCH. You should be able to somehow fashion a LADDER to the ATTIC.\nThe CRAFT BENCH in the GARAGE should be able to help you GET your LADDER.");
                         }
@@ -131,6 +131,25 @@ namespace TPGame.Dictionaries
                         if (Collections.VerifyRoom("Hidden Room") != null)
                         {
                             DialogueHandler.PrintLine("The SWITCH must have changed something! Check the MAP to see if there's anything new that wasn't there before!");
+                        }
+                        else if (InputHandler.GetCurrentLocation() == "Hidden Room" && !Collections.VerifyRoom("Hidden Room").BossDefeated)
+                        {
+                            DialogueHandler.PrintLine("Don't be scared! You have everything you need. Use everything you have to take down the King!");
+                        }
+                        else if (Collections.VerifyRoom("Hidden Room").BossDefeated)
+                        {
+                            if (!Collections.VerifyInventory("mints"))
+                            {
+                                DialogueHandler.PrintLine("Phew! The king has been defeated! You can push that BUTTON on the wall and end this madness.");
+                            }
+                            else if (!Collections.VerifyItem("mints").Hide)
+                            {
+                                DialogueHandler.PrintLine("Phew! The king has been defeated! You can push that BUTTON on the wall, but there's a mysterious laughter coming from your pocket. Oh yeah! You still have those MINTS.");
+                            }
+                            else
+                            {
+                                DialogueHandler.PrintLine("With the true villains dissolving in your cheeks and stomach, all that remains is the BUTTON on the wall of the HIDDEN ROOM. That should finally resolve this mess.");
+                            }
                         }
                         else
                         {

@@ -84,5 +84,7 @@ namespace TPGame.Handlers
             Character.SpawnEnemy(roomName);
             Map.InCombat = true;
         }
+
+        public static string GetCurrentLocation() => Map.CurrentLocation.Name;
     }
 }

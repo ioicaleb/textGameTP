@@ -31,7 +31,7 @@ namespace TPGame.Items
                 {
                     Eaten = true;
                     message = "You shove the mints into your mouth, sucking and biting down as they scream and wail at their plan failing.\nThe weird voice in your head hasn't gone away yet, but you're confident that once the mints dissolve and get digested you'll return to normal.\nThe only thing to do is to USE the BUTTON and end this madness.";
-                    Collections.RemoveUsedItem(Name);
+                    Collections.HideUsedItem(Name);
                 }
                 else
                 {

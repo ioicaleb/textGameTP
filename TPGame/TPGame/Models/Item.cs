@@ -6,6 +6,7 @@ namespace TPGame.Models
     {
         public string Name;
         public string Description;
+        public bool Hide = false;
 
         // <summary>
         /// Displays generic get text if not overwritten

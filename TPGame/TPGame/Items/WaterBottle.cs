@@ -56,7 +56,7 @@ namespace TPGame.Items
             if (InputHandler.Map.CurrentLocation.Name == "Hidden Room" && WaterLevel > 0)
             {
                 message = "Knowing this is your last chance to use it, you spray all of your remaining water over the king. The powerful spray wears down his thick outer shell. " + InputHandler.Character.AttackKing(WaterLevel);
-                Collections.RemoveUsedItem(Name);
+                Collections.HideUsedItem(Name);
             }
             base.UseItem(message);
         }

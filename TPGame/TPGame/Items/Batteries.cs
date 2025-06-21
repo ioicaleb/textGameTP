@@ -5,7 +5,7 @@ namespace TPGame.Items
 {
     public class Batteries : Item
     {
-        public Batteries() 
+        public Batteries()
         {
             Name = "batteries";
             Description = "Four C batteries that should have enough juice to power the lantern for as long as you need.";
@@ -15,15 +15,18 @@ namespace TPGame.Items
         {
             string message;
             CampingLantern campingLantern = (CampingLantern)Collections.CheckInventory("lantern");
-            if (campingLantern != null && !campingLantern.HasBatteries)
+            if (campingLantern != null)
             {
-                campingLantern.HasBatteries = true;
-                message = "You remove the pack to the lantern and insert the batteries. You test the lantern to see that it does turn on now. To preserve batteries, you switch the lantern back off.";
-                Collections.RemoveUsedItem(Name);
-            }
-            else if (campingLantern.HasBatteries)
-            {
-                message = "You check the batteries in the lantern. They seem to be fine, so you shouldn't mess with them right now.";
+                if (!campingLantern.HasBatteries)
+                {
+                    campingLantern.HasBatteries = true;
+                    message = "You remove the pack to the lantern and insert the batteries. You test the lantern to see that it does turn on now. To preserve batteries, you switch the lantern back off.";
+                    Collections.HideUsedItem(Name);
+                }
+                else
+                {
+                    message = "You check the batteries in the lantern. They seem to be fine, so you shouldn't mess with them right now.";
+                }
             }
             else
             {
