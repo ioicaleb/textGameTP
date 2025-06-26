@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using TPGame.Commands;
-using TPGame.Dictionaries;
-using TPGame.Interactables;
-using TPGame.Items;
 using TPGame.Models;
-using TPGame.Rooms;
 
 namespace TPGame.Handlers
 {
@@ -29,7 +23,7 @@ namespace TPGame.Handlers
 #endif
             if (UserInput.GetBool("Do you want a tutorial?: "))
             {
-                TutorialHandler.Teach();
+                 new TutorialHandler().Teach();
             }
             else
             {

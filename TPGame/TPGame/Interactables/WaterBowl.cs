@@ -1,7 +1,8 @@
-﻿using TPGame.Dictionaries;
-using TPGame.Models;
+﻿using TPGame.Models;
 using TPGame.Items;
 using TPGame.Handlers;
+using TPGame.Dictionaries;
+using TPGame.Rooms;
 
 namespace TPGame.Interactables
 {
@@ -20,9 +21,10 @@ namespace TPGame.Interactables
         public override void UseInteractable()
         {
             string message;
-            if (Collections.VerifyInventory("water bottle") && Used())
+            if (Collections.VerifyInventory("water bottle") && !Used())
             {
                 ((WaterBottle)Collections.CheckInventory("water bottle")).AddWater(WaterLevel);
+                ((Kitchen)Collections.VerifyRoom("Kitchen")).WaterUsed = true;
                 WaterLevel = 0;
                 DialogueHandler.PrintLine("You kneel down and inspect the water briefly. Desperate times...");
                 DialogueHandler.AddPause(300);

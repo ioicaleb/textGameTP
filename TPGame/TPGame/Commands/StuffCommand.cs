@@ -1,8 +1,8 @@
 ﻿using TPGame.Handlers;
 using TPGame.Models;
-using TPGame.Dictionaries;
 using TPGame.Rooms;
 using TPGame.Items;
+using TPGame.Dictionaries;
 
 namespace TPGame.Commands
 {
@@ -122,7 +122,7 @@ namespace TPGame.Commands
                         if (item.Name == "tool belt" || (item.Name == "hints" && !Collections.VerifyInventory("hints")))
                         {
                             item.GetItem();
-                            Collections.Inventory.Add(item);
+                            Collections.AddInventory(item);
                             currentLocation.GetItems.Remove(item.Name);
                         }
                         else
@@ -140,7 +140,7 @@ namespace TPGame.Commands
                         else
                         {
                             item.GetItem();
-                            Collections.Inventory.Add(item);
+                            Collections.AddInventory(item);
                             currentLocation.GetItems.Remove(item.Name);
                         }
                     }
@@ -179,7 +179,7 @@ namespace TPGame.Commands
                     {
                         "towel" => "It's sweaty and gross. Just leave it here to dry.",
                         "candles" => "You think about grabbing them, but then you'd have to reset them, and, if you burn one, they'll be uneven. It's just not worth it.",
-                        "chair" => "There's weirdly no strap on your tool belt for the chair. You can fit some wild stuff on your belt so this must mean that you don't need it for the plan.",
+                        "chair" => "There's weirdly no strap on your tool belt for the chair. You can fit some wild Collections on your belt so this must mean that you don't need it for the plan.",
                         "home gym" => "If you take it out of here, it will just sit around wherever you move it to until you eventually bring it back. Best to just leave it.",
                         "sander" => "It's been through enough taking out the bishop. It doesn't seem like it would do much more from here anyway.",
                         "chest" => "You can't even open it yet. Best to just leave it be.",

@@ -1,6 +1,6 @@
-﻿using TPGame.Dictionaries;
-using TPGame.Handlers;
+﻿using TPGame.Handlers;
 using TPGame.Models;
+using TPGame.Dictionaries;
 
 namespace TPGame.Items
 {
@@ -24,21 +24,7 @@ namespace TPGame.Items
         public override void UseItem()
         {
             DialogueHandler.PrintLine("You look at your belt to see what all you've collected.");
-
-            if (Collections.Inventory.Count > 1)
-            {
-                foreach (Item item in Collections.Inventory)
-                {
-                    if (item.Name != "tool belt" && !item.Hide) 
-                    { 
-                        DialogueHandler.PrintLine($" -{item.Name}");
-                    }
-                }
-            }
-            else
-            {
-                base.UseItem("Just a bunch of empty pockets, holsters, and straps.");
-            }
+            Collections.ListInventory();
         }
     }
 }

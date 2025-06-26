@@ -19,7 +19,7 @@ namespace TPGame.Items
 
         public override void UseItem()
         {
-            Garage garage = (Garage)Collections.Rooms.Find(room => room.Name == "Garage");
+            Garage garage = (Garage)Collections.VerifyRoom("Garage");
             if (garage.Locked)
             {
                 base.UseItem("You turn the key in the door lock. This may have been an effective way of keeping anyone who broke into your garage from accessing the rest of the house, but now, it just seems like a huge hassle.");

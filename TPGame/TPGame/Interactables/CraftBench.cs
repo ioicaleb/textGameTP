@@ -1,6 +1,7 @@
-﻿using TPGame.Dictionaries;
-using TPGame.Handlers;
+﻿using TPGame.Handlers;
 using TPGame.Models;
+using TPGame.Dictionaries;
+
 namespace TPGame.Interactables
 {
     public class CraftBench : Interactable

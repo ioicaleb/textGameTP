@@ -114,5 +114,17 @@ namespace TPGame.Handlers
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
         }
+
+        public static void RespondWithJokes(string target) 
+        {
+            string response = target switch
+            {
+                "self" => "",
+                "hands" => "You got a great pair of mitts on you. You should take care of them by using proper tools.",
+                "feelings" => "You search your feelings and know that which you fear most is certainly true.",
+                _ => "Error 451: Please consult your lawyer.",
+            };
+            DialogueHandler.PrintLine(response);
+        }
     }
 }

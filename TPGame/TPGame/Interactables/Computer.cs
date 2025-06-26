@@ -18,7 +18,7 @@ namespace TPGame.Interactables
             if (!Collections.VerifyInventory("hints"))
             {
                 message = "You dig through your folders to find your emergency plan. With that printed out, you'll be able to reference your plan whenever you forget it. You hover over the GET HINTS button to send the list to your printer.";
-                Collections.Inventory.Add(new HintList());
+                Collections.AddInventory(new HintList());
             }
             else 
             {

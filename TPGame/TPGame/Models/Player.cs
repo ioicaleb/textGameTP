@@ -6,6 +6,8 @@ namespace TPGame.Models
 {
     public class Player
     {
+        
+
         public Player() 
         {
             SugarLevel = 0;

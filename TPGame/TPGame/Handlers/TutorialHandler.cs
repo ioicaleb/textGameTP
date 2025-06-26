@@ -1,15 +1,17 @@
 ﻿using System;
-using TPGame.Dictionaries;
 using TPGame.Models;
+using TPGame.Dictionaries;
 
 namespace TPGame.Handlers
 {
-    public static class TutorialHandler
+    public class TutorialHandler
     {
+        
+
         /// <summary>
         /// Start the game tutorial and end with player in master bedroom with tool belt
         /// </summary>
-        public static void Teach()
+        public void Teach()
         {
             SetRoomForTutorial();
             DialogueHandler.PrintLine("Welcome! There are a preset list of commands that will work. This tutorial will highlight a few, but you can get a full list at any time by typing HELP." +
@@ -85,14 +87,14 @@ namespace TPGame.Handlers
             ResetRoomAfterTutorial();
         }
 
-        private static void SetRoomForTutorial()
+        private void SetRoomForTutorial()
         {
             InputHandler.Map.CurrentLocation = new Room();
             Collections.VerifyRoom("Master Bedroom").EncounterChance = 0;
             Collections.VerifyRoom("Master Bedroom").Description = "You are in the Master Bedroom. Wrappers are strewn across the floor and the BED is unmade. The CLOSET door is slightly ajar.";
         }
 
-        private static void ResetRoomAfterTutorial()
+        private void ResetRoomAfterTutorial()
         {
             Collections.VerifyRoom("Master Bedroom").EncounterChance = 0.6;
             Collections.VerifyRoom("Master Bedroom").Description = "You return to the Master Bedroom. Perhaps, you missed something before. Better safe than sorry. Couldn't hurt to check under the BED, through the DRESSER, or in the CLOSET.";

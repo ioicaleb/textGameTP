@@ -1,5 +1,5 @@
-﻿using TPGame.Dictionaries;
-using TPGame.Handlers;
+﻿using TPGame.Handlers;
+using TPGame.Dictionaries;
 using TPGame.Models;
 
 namespace TPGame.Commands

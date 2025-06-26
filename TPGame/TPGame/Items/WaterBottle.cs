@@ -1,7 +1,6 @@
 ﻿using TPGame.Handlers;
-using TPGame.Models;
 using TPGame.Dictionaries;
-using TPGame.Commands;
+using TPGame.Models;
 
 namespace TPGame.Items
 {

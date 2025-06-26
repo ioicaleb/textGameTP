@@ -16,7 +16,7 @@ namespace TPGame.Items
 
         public override void GetItem()
         {
-            Attic attic = (Attic)Collections.Rooms.Find(r => r.Name == "Attic");
+            Attic attic = (Attic)Collections.VerifyRoom("Attic");
             attic.Description = attic.Description.Split("\n")[0];
             base.GetItem("You attach the handle to a strap on your tool belt. You'll need to add batteries when you have a chance.");
         }
@@ -27,7 +27,7 @@ namespace TPGame.Items
             {
                 base.UseItem("You click the switch on the lantern, creating a slightly blue glow.");
                 Collections.HideUsedItem(Name);
-                ((Basement)(Collections.Rooms.Find(r => r.Name == "Basement"))).Light();
+                ((Basement)(Collections.VerifyRoom("Basement"))).Light();
             }
             else
             {

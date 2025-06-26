@@ -1,6 +1,5 @@
 ﻿using TPGame.Models;
 using TPGame.Dictionaries;
-using TPGame.Rooms;
 
 namespace TPGame.Interactables
 {
@@ -20,7 +19,7 @@ namespace TPGame.Interactables
             string message;
             if (!Hidden && !On)
             {
-                Collections.Rooms.Add(new HiddenRoom());
+                Collections.AddHiddenRoom();
                 message = "You lift the plastic cover and flick the switch. You hear a loud rumbling noise. Something has changed.";
                 On = true;
             }

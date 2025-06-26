@@ -4,6 +4,7 @@ using TPGame.Items;
 using TPGame.Rooms;
 using TPGame.Models;
 using System;
+using TPGame.Handlers;
 
 namespace TPGame.Dictionaries
 {
@@ -98,7 +99,7 @@ namespace TPGame.Dictionaries
             ["Quit"] = "There are no saves, but you can quit out whenever you feel like it."
         };
 
-        public static Item VerifyItem(string itemName) => Array.Find(Collections.AllItems, i => i.Name == itemName);
+        public static Item VerifyItem(string itemName) => Array.Find(Collections.AllItems, i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
 
         public static Item CheckInventory(string itemName)
         {
@@ -110,13 +111,79 @@ namespace TPGame.Dictionaries
             return null;
         }
 
-        public static Interactable VerifyInteractable(string interactableName) => Array.Find(Collections.AllInteractables, i => i.Name == interactableName);
+        public static Interactable VerifyInteractable(string interactableName) => Array.Find(Collections.AllInteractables, i => i.Name.Equals(interactableName, StringComparison.OrdinalIgnoreCase));
 
-        public static Room VerifyRoom(string roomName) => Collections.Rooms.Find(r => r.Name == roomName);
+        public static Room VerifyRoom(string roomName) => Collections.Rooms.Find(r => r.Name.Equals(roomName, StringComparison.OrdinalIgnoreCase));
 
         public static bool VerifyInventory(string itemName) => CheckInventory(itemName) != null;
 
         public static void HideUsedItem(string itemName) => CheckInventory(itemName).Hide = true;
+
+        public static void AddInventory(Item item) => Inventory.Add(item);
+
+        public static void AddHiddenRoom() => Rooms.Add(new HiddenRoom());
+
+        public static void ListInputs()
+        {
+            foreach (KeyValuePair<string, string> i in ValidInputs)
+            {
+                DialogueHandler.PrintLine($"{i.Key} - {i.Value}");
+            }
+        }
+
+        public static void ListRooms()
+        {
+            foreach (Room room in Rooms)
+            {
+                string roomName = room.Name;
+                switch (roomName)
+                {
+                    case "Garage":
+                        if (((Garage)room).Locked)
+                        {
+                            roomName += " (Locked)";
+                        }
+                        break;
+                    case "Attic":
+                        if (((Attic)room).Locked)
+                        {
+                            roomName += " (Locked)";
+                        }
+                        break;
+                    case "Basement":
+                        if (((Basement)room).IsDark)
+                        {
+                            roomName += " (Dark)";
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (room.Name == InputHandler.Map.CurrentLocation.Name)
+                {
+                    roomName += " - Current Location";
+                }
+                DialogueHandler.PrintLine($"{roomName}");
+            }
+        }
+
+        public static void ListInventory()
+        {
+            if (Inventory.Count > 1)
+            {
+                foreach (Item i in Inventory)
+                {
+                    if (!i.Hide && i.Name != "tool belt")
+                    {
+                        DialogueHandler.PrintLine($"-{char.ToUpper(i.Name[0])}{i.Name.Substring(1)}");
+                    }
+                }
+            }
+            else
+            {
+                DialogueHandler.PrintLine("");
+            }
+        }
 
         public static void ResetAll()
         {

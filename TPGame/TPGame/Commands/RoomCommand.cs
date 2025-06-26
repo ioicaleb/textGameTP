@@ -2,12 +2,12 @@
 using TPGame.Handlers;
 using TPGame.Models;
 using TPGame.Dictionaries;
-using System.ComponentModel.Design;
 
 namespace TPGame.Commands
 {
     public class RoomCommand
     {
+        
         public Room CurrentLocation { get; set; } = new MasterBedroom();
         public bool InCombat { get; set; } = false;
 
@@ -18,18 +18,16 @@ namespace TPGame.Commands
         /// <returns></returns>
         public bool VerifyRoom(string target)
         {
-            foreach (Room room in Collections.Rooms)
+            Room room = Collections.VerifyRoom(target);
+            if (room != null)
             {
-                if (room.Name.Equals(target, System.StringComparison.CurrentCultureIgnoreCase))
+                if (room.Name == CurrentLocation.Name)
                 {
-                    if (room.Name == CurrentLocation.Name)
-                    {
-                        DialogueHandler.PrintLine("You're already there");
-                        return false;
-                    }
-                    CurrentLocation = room;
-                    return true;
+                    DialogueHandler.PrintLine("You're already there");
+                    return false;
                 }
+                CurrentLocation = room;
+                return true;
             }
             DialogueHandler.PrintLine("Sorry. That's not a place you can go right now.");
             return false;
@@ -59,45 +57,6 @@ namespace TPGame.Commands
             else
             {
                 return false;
-            }
-        }
-
-        /// <summary>
-        /// Lists the rooms and current location
-        /// </summary>
-        public void ViewMap()
-        {
-            foreach (Room room in Collections.Rooms)
-            {
-                string roomName = room.Name;
-                switch (room.Name)
-                {
-                    case "Garage":
-                        if (((Garage)room).Locked)
-                        {
-                            roomName += " (Locked)";
-                        }
-                        break;
-                    case "Attic":
-                        if (((Attic)room).Locked)
-                        {
-                            roomName += " (Locked)";
-                        }
-                        break;
-                    case "Basement":
-                        if (((Basement)room).IsDark)
-                        {
-                            roomName += " (Dark)";
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                if (room.Name == CurrentLocation.Name)
-                {
-                    roomName += " - Current Location";
-                }
-                DialogueHandler.PrintLine($"{roomName}");
             }
         }
 

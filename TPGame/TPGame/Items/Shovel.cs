@@ -1,9 +1,8 @@
-﻿using TPGame.Commands;
-using TPGame.Dictionaries;
-using TPGame.Handlers;
+﻿using TPGame.Handlers;
 using TPGame.Interactables;
 using TPGame.Models;
 using TPGame.Rooms;
+using TPGame.Dictionaries;
 
 namespace TPGame.Items
 {
@@ -18,9 +17,9 @@ namespace TPGame.Items
         public override void UseItem()
         {
             string message;
-            if (!((Backyard)(Collections.Rooms.Find(r => r.Name == "Backyard"))).Interactables.Contains("switch"))
+            if (!((Backyard)(Collections.VerifyRoom("Backyard"))).Interactables.Contains("switch"))
             {
-                ((Backyard)(Collections.Rooms.Find(r => r.Name == "Backyard"))).Interactables.Add("switch");
+                ((Backyard)(Collections.VerifyRoom("Backyard"))).Interactables.Add("switch");
                 ((BuriedSwitch)(Collections.VerifyInteractable("switch"))).Hidden = false;
                 message = "You scoop up the loose dirt with ease. It's not long before you uncover a strange metal plate with a SWITCH covered in a plastic case.";
             }

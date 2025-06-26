@@ -29,25 +29,7 @@ namespace TPGame.Models
             DialogueHandler.Print("What do you do?: ");
             string input = Console.ReadLine().ToLower().Trim();
             string[] inputSplit = input.Split(" ");
-            InputAction action = new()
-            {
-                Command = inputSplit[0].ToLower(),
-            };
-            if (inputSplit.Length > 1)
-            {
-                for (int i = 1; i < inputSplit.Length; i++)
-                {
-                    if (inputSplit[i] == "" && (action.Target == null || action.Target[i - 1] == ' '))
-                    {
-                        continue;
-                    }
-
-                    action.Target += inputSplit[i].ToLower() + " ";
-                }
-                action.Target = action.Target.Trim(' ', '\\', '|', '[', ']', '}', '\"', '\'');
-         
-            }
-            return action;
+            return new InputAction(inputSplit);
         }
 
         public static InputAction GetAction(string message)
@@ -56,23 +38,7 @@ namespace TPGame.Models
             DialogueHandler.Print(message);
             string input = Console.ReadLine().ToLower().Trim();
             string[] inputSplit = input.Split(" ");
-            InputAction action = new()
-            {
-                Command = inputSplit[0].ToLower(),
-            };
-            if (inputSplit.Length > 1)
-            {
-                for (int i = 1; i < 3 && i < inputSplit.Length; i++)
-                {
-                    if (inputSplit[i] == "" && (action.Target == null || action.Target[i - 1] == ' '))
-                    {
-                        break;
-                    }
-                    action.Target += inputSplit[i].ToLower() + " ";
-                }
-                action.Target = action.Target.Trim(' ', '\\', '|', '[', ']', '}', '\"', '\'');
-            }
-            return action;
+            return new InputAction(inputSplit);
         }
 
         /// <summary>

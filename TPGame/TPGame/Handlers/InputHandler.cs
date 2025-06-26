@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TPGame.Commands;
 using TPGame.Models;
 using TPGame.Dictionaries;
@@ -23,25 +22,28 @@ namespace TPGame.Handlers
                     Map.InCombat = Character.AttackEnemy(Map.InCombat);
                     break;
                 case "move":
-                    if (Map.ChangeRoom(action.Target) && Map.InCombat && !Map.CurrentLocation.BossDefeated) 
+                    if (Map.ChangeRoom(action.Target) && Map.InCombat && !Map.CurrentLocation.BossDefeated)
                     {
                         Character.SpawnEnemy(Map.CurrentLocation.Name);
                     }
                     break;
                 case "map":
-                    Map.ViewMap();
+                    Collections.ListRooms();
                     break;
                 case "check":
                     StuffCommand.CheckItem(action.Target);
                     break;
+                case "open":
                 case "use":
                     StuffCommand.UseItem(action.Target, Map.CurrentLocation);
                     break;
+                case "take":
+                case "grab":
                 case "get":
                     StuffCommand.GetItem(action.Target, Map.CurrentLocation);
                     break;
                 case "help":
-                    ListHelp();
+                    Collections.ListInputs();
                     break;
                 case "hint":
                     Hints.DisplayHints();
@@ -50,7 +52,14 @@ namespace TPGame.Handlers
                     CommandHandler.QuitGame();
                     break;
                 case "search":
-                    Map.SearchRoom();
+                    if (action.Target == "" || Collections.VerifyRoom(char.ToUpper(action.Target[0]) + action.Target.Substring(1)) != null)
+                    {
+                        Map.SearchRoom();
+                    }
+                    else
+                    {
+                        DialogueHandler.RespondWithJokes(action.Target);
+                    }
                     break;
                 case "sugar":
                     DialogueHandler.PrintLine($"Your sugar level is currently {Character.Player.GetSugar()}%");
@@ -66,18 +75,7 @@ namespace TPGame.Handlers
             }
         }
 
-        /// <summary>
-        /// Lists the possible action commands
-        /// </summary>
-        private static void ListHelp()
-        {
-            foreach (KeyValuePair<string, string> item in Collections.ValidInputs)
-            {
-                DialogueHandler.PrintLine($"({item.Key}) {item.Value}", 10);
-            }
-        }
-
-        public static void EnterRoom(string roomName) 
+        public static void EnterRoom(string roomName)
         {
             DialogueHandler.PrintCentered(Map.CurrentLocation.Image);
             DialogueHandler.PrintLine(Map.CurrentLocation.Description);

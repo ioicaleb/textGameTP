@@ -43,7 +43,7 @@ namespace TPGame.Interactables
             Console.BackgroundColor = (ConsoleColor)currentBC;
             Console.ForegroundColor = (ConsoleColor)currentFC;
             Console.Clear();
-            DialogueHandler.PrintLine("When it fades, you see that you are back in your yard. The dirt piles are gone. Your tool belt is gone. All of the stuff you collected is gone.");
+            DialogueHandler.PrintLine("When it fades, you see that you are back in your yard. The dirt piles are gone. Your tool belt is gone. All of the Collections you collected is gone.");
             DialogueHandler.AddPause(500);
             DialogueHandler.PrintLine("It's over. Great job!", 40);
             CommandHandler.WinGame();

@@ -1,7 +1,7 @@
-﻿using TPGame.Dictionaries;
-using TPGame.Handlers;
+﻿using TPGame.Handlers;
 using TPGame.Models;
 using TPGame.Rooms;
+using TPGame.Dictionaries;
 
 namespace TPGame.Items
 {
@@ -15,7 +15,7 @@ namespace TPGame.Items
 
         public override void UseItem()
         {
-            Attic attic = (Attic)Collections.Rooms.Find(room => room.Name == "Attic");
+            Attic attic = (Attic)Collections.VerifyRoom("Attic");
             if (attic.Locked)
             {
                 base.UseItem("You hook the ends of the ladder into the slots on the attic hatch. After a quick integrity check, you confidently climb into the attic.");
